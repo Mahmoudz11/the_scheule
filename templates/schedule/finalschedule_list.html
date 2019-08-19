@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+  <div class="container">
+
+<br><br><br>
+  {% for object in object_list %}
+    {% for item in object.schedule.all %}
+  <table border = "1">
+    <th> Course </th>
+    <th>{{ item.course_name }}</th>
+    <tbody>
+      <th> Instructor Name </th>
+      <td>{{ item.instructor_name }}</td>
+      <th> Course Date </th>
+      <td>{{ item.day }}</td>
+      <th> Course Time </th>
+      <td>{{ item.from_hour }} to {{ item.to_hour }}</td>
+      <th> Course Location</th>
+      <td>{{ item.location }}</td>
+    </tbody>
+  </table>
+  <br>
+  {% endfor %}
+  {% if request.user == object.user %}
+    <a href="{% url 'schedule:final-update' object.pk %}"><button type="button" class='btn btn-primary' name="button">Update</button></a>
+    <a href="{% url 'schedule:final-delete' object.pk %}"><button type="button" class='btn btn-danger' name="button">Delete</button></a>
+  {% endif %}
+  <br><br><hr>
+  {% endfor %}
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h2 class="text-center">Create a Schedule</h2>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="container">
+  <form class="" method="post">{% csrf_token %}
+    {{ i_form|crispy }}
+    {{ c_form|crispy }}
+    {{ h_form|crispy }}
+    {{ d_form|crispy }}
+    {{ l_form|crispy }}
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" name="button">Create</button>
+    </div>
+  </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h3 class="text-center">Instructor Sign In</h3>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="container col-4">
+
+  <form class="form-signin" method="post">{% csrf_token %}
+     <input type="text" name='username' class="form-control" placeholder="username" required autofocus>
+     <input type="password" name="password" class="form-control" placeholder="Password" required>
+     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+</div>
+{% endblock %}
